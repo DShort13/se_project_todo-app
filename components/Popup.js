@@ -1,6 +1,7 @@
 class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
+    this._popupCloseBtn = this._popupElement.querySelector(".popup__close");
   }
 
   open() {
@@ -13,11 +14,11 @@ class Popup {
 
   // _handleEscapeClose() {}
 
-  // setEventListeners() {
-  //   this._popupElement.addEventListener("click", () => {
-  //     closeModal(this._popupElement);
-  //   });
-  // }
+  setEventListeners() {
+    this._popupCloseBtn.addEventListener("click", () => {
+      this.close();
+    });
+  }
 }
 
 export default Popup;

@@ -36,26 +36,30 @@ addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
 
-addTodoCloseBtn.addEventListener("click", () => {
-  addTodoPopup.close();
-});
+addTodoPopup.setEventListeners();
 
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
+// addTodoCloseBtn.addEventListener("click", () => {
+//   addTodoPopup.close();
+// });
 
-  // Create a date object and adjust for timezone
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+// addTodoForm.addEventListener("submit", (evt) => {
+//   evt.preventDefault();
+//   const name = evt.target.name.value;
+//   const dateInput = evt.target.date.value;
 
-  const id = uuidv4();
-  const values = { name, date, id };
-  const todo = generateTodo(values);
-  section.addItem(todo);
-  closeModal(addTodoPopupEl);
-  newTodoValidator.resetValidation();
-});
+//   // Create a date object and adjust for timezone
+//   const date = new Date(dateInput);
+//   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+//   const id = uuidv4();
+//   const values = { name, date, id };
+//   const todo = generateTodo(values);
+//   section.addItem(todo);
+
+//   addTodoPopup.close();
+
+//   newTodoValidator.resetValidation();
+// });
 
 section.renderItems();
 
