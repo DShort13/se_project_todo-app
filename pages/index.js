@@ -4,29 +4,27 @@ import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopup = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopup.querySelector(".popup__form");
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
-const todosList = document.querySelector(".todos__list");
+const addTodoPopupEl = document.querySelector("#add-todo-popup");
+const addTodoForm = addTodoPopupEl.querySelector(".popup__form");
+const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
+// const todosList = document.querySelector(".todos__list");
 
 const section = new Section({
   items: initialTodos,
   renderer: (item) => {
-    // Generate todo item
-    // Add it to the todo list
-    // Refer to the forEach loop in this file
     const todo = generateTodo(item);
-    section.addItem(todo); // Use addItem method instead
+    section.addItem(todo);
   },
   containerSelector: ".todos__list",
 });
-// Call section instance's renderItems method
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
+const addTodoPopup = new PopupWithForm({
+  popupSelector: "#add-todo-popup",
+  handleFormSubmit: () => {},
+});
 
 const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
@@ -39,11 +37,11 @@ const generateTodo = (data) => {
 };
 
 addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopup);
+  addTodoPopup.open();
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopup);
+  closeModal(addTodoPopupEl);
 });
 
 addTodoForm.addEventListener("submit", (evt) => {
@@ -59,7 +57,7 @@ addTodoForm.addEventListener("submit", (evt) => {
   const values = { name, date, id };
   const todo = generateTodo(values);
   section.addItem(todo);
-  closeModal(addTodoPopup);
+  closeModal(addTodoPopupEl);
   newTodoValidator.resetValidation();
 });
 

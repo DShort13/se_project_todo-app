@@ -1,5 +1,3 @@
-// Create Section class
-
 class Section {
   constructor({ items, renderer, containerSelector }) {
     this._items = items;
