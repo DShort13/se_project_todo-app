@@ -3,29 +3,30 @@ import Popup from "./Popup.js";
 class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super({ popupSelector });
-    // this._handleFormSubmit = handleFormSubmit;
+    this._handleFormSubmit = handleFormSubmit;
+    this._popupForm = this._popupElement.querySelector(".popup__form");
+    this._inputList = this._popupForm.querySelectorAll(".popup__input");
   }
 
-  // _getInputValues() {}
+  _getInputValues() {
+    const inputValues = {};
+    this._inputList.forEach((input) => {
+      inputValues[input.name] = [input.value];
+    });
 
-  // setEventListeners() {
-  //   this._popupElement.addEventListener("submit", (evt) => {
-  //     evt.preventDefault();
-  //     const name = evt.target.name.value;
-  //     const dateInput = evt.target.date.value;
+    return inputValues;
+  }
 
-  //     // Create a date object and adjust for timezone
-  //     const date = new Date(dateInput);
-  //     date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  setEventListeners() {
+    super.setEventListeners();
+    this._popupForm.addEventListener("submit", (evt) => {
+      evt.preventDefault();
 
-  //     const id = uuidv4();
-  //     const values = { name, date, id };
-  //     const todo = generateTodo(values);
-  //     section.addItem(todo);
-  //     closeModal();
-  //     newTodoValidator.resetValidation();
-  //   });
-  // }
+      this._getInputValues();
+
+      this._handleFormSubmit(this._getInputValues());
+    });
+  }
 }
 
 export default PopupWithForm;
