@@ -34,7 +34,7 @@ const addTodoPopup = new PopupWithForm({
     const values = { name, date, id };
     const todo = generateTodo(values);
     section.addItem(todo);
-    todoCounter._updateTotal(true);
+    todoCounter.updateTotal(true);
 
     addTodoPopup.close();
 
@@ -45,15 +45,15 @@ const addTodoPopup = new PopupWithForm({
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 function handleCheck(completed) {
-  todoCounter._updateCompleted(completed);
+  todoCounter.updateCompleted(completed);
 }
 
 function handleDelete(completed) {
   if (completed) {
-    todoCounter._updateCompleted(completed);
+    todoCounter.updateCompleted(completed);
   }
 
-  todoCounter._updateTotal(false);
+  todoCounter.updateTotal(false);
 }
 
 const generateTodo = (data) => {

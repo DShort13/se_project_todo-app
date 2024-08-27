@@ -6,13 +6,13 @@ class TodoCounter {
     this._updateText();
   }
 
-  _updateCompleted = (increment) => {
+  updateCompleted = (increment) => {
     this._completed += increment ? 1 : -1;
 
     this._updateText();
   };
 
-  _updateTotal = (increment) => {
+  updateTotal = (increment) => {
     this._total += increment ? 1 : -1;
 
     this._updateText();
